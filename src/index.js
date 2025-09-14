@@ -6,6 +6,7 @@ import cors from "cors";
 import { connectDB } from "./lib/db.js";
 import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
+import groupRoute from "./routes/group.route.js";
 import { app, server } from "./lib/socket.js";
 
 dotenv.config();
@@ -19,8 +20,8 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // local frontend
-      "https://chat-app-frontend-omega-sand.vercel.app", // deployed frontend
+      "http://localhost:5173",
+      "https://chat-app-frontend-omega-sand.vercel.app",
     ],
     credentials: true,
     exposedHeaders: ["set-cookie"],
@@ -30,6 +31,7 @@ app.use(
 // Routes
 app.use("/api/auth", authRoute);
 app.use("/api/messages", messageRoute);
+app.use("/api/groups", groupRoute);
 
 // Start server + DB
 server.listen(PORT, () => {
